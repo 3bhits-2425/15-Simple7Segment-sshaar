@@ -11,12 +11,12 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
-        fluegel = GameObject.FindGameObjectsWithTag("Fluegel");
-        startPos = new Vector3[fluegel.Length];
-        for (int i = 0; i < fluegel.Length; i++)
+        fluegel = new GameObject[7];
+        for (int i = 0; i < 7; i++)
         {
-            startPos[i] = fluegel[i].transform.position;
+            fluegel[i] = GameObject.Find("Fluegel" + i);
         }
+        
     }
 
     void Update()
@@ -27,7 +27,7 @@ public class Manager : MonoBehaviour
             {
                 ResetPos();
                 On(2);
-                On(7);
+                On(5);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -124,13 +124,19 @@ public class Manager : MonoBehaviour
             rb.isKinematic = true;  
             isOn = true;
             startButton.interactable = false;
+            startPos = new Vector3[fluegel.Length];
+            for (int i = 0; i < fluegel.Length; i++)
+            {
+                startPos[i] = fluegel[i].transform.position;
+            }
         }
         
     }
 
     private void On(int i)
     {
-        fluegel[i].transform.position = startPos[i] + new Vector3(0, 0, 3);
+        fluegel[i].transform.position = startPos[i] + new Vector3(0, 0, -1);
+
 
     }
 
